@@ -347,22 +347,19 @@ weighted avg     0.8902    0.8923    0.8911     10000
 
 > The confusion matrix is saved to `outputs/confusion_matrix.png` after evaluation.
 
-<!--
 ![Confusion Matrix](outputs/confusion_matrix.png)
--->
 
 ### Prediction Visualization
 
 > True labels vs. predicted labels for sample test images, saved to `outputs/predictions.png`.
 
-<!--
 ![Predictions](outputs/predictions.png)
--->
 
 ### Classification Report
 
-> The full per-class report is saved to `outputs/classification_report.txt`.
+The detailed classification report can be found here.
 
+[View Classification Report](outputs/classification_report.txt)
 </details>
 
 > [!TIP]
