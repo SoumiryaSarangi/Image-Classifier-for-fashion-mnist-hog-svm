@@ -1,0 +1,249 @@
+# =============================================================================
+# Python
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+pytestdebug.log
+
+# Sphinx documentation
+docs/_build/
+
+# Translations
+*.mo
+*.pot
+
+# =============================================================================
+# Virtual Environments
+# =============================================================================
+
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# =============================================================================
+# Jupyter Notebooks
+# =============================================================================
+
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# =============================================================================
+# Machine Learning — Large Generated Artifacts
+# (These are recreated automatically by running main.py)
+# =============================================================================
+
+# Trained SVM model
+models/image_classifier.joblib
+
+# Cached HOG feature files (very large — regenerated on first run)
+models/train_hog.joblib
+models/test_hog.joblib
+
+# Keep the models/ folder itself tracked (do not ignore the directory)
+!models/.gitkeep
+
+# =============================================================================
+# TensorFlow / Keras
+# =============================================================================
+
+# TensorFlow saved models and checkpoints
+*.h5
+*.keras
+*.ckpt
+*.ckpt.*
+*.pb
+saved_model/
+checkpoint
+
+# TensorFlow logs
+logs/
+tensorboard_logs/
+
+# =============================================================================
+# Environment & Secrets
+# =============================================================================
+
+.env
+.env.*
+.envrc
+*.env
+secrets.yaml
+secrets.json
+config.local.*
+
+# =============================================================================
+# IDE — Visual Studio Code
+# =============================================================================
+
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# =============================================================================
+# IDE — PyCharm / JetBrains
+# =============================================================================
+
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# =============================================================================
+# IDE — Spyder
+# =============================================================================
+
+.spyderproject.cfg
+.spyproject/
+
+# =============================================================================
+# IDE — Rope (Python refactoring)
+# =============================================================================
+
+.ropeproject/
+
+# =============================================================================
+# OS Generated Files
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# =============================================================================
+# Temporary & Log Files
+# =============================================================================
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+*.rej
+*.pid
+
+# =============================================================================
+# Compiled / Binary files
+# =============================================================================
+
+*.dll
+*.exe
+*.out
+*.app
+*.class
+
+# =============================================================================
+# Data files (large datasets — download separately)
+# =============================================================================
+
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.hdf5
+*.npz
+*.npy
+
+# =============================================================================
+# EXPLICITLY TRACKED — Do NOT ignore these
+# =============================================================================
+
+# Source code
+!src/
+!src/*.py
+!main.py
+!requirements.txt
+!README.md
+
+# Test images used for custom prediction
+!images/
+!images/*.png
+!images/*.jpg
+!images/*.jpeg
+
+# Evaluation outputs (demonstration artifacts — small enough to track)
+!outputs/
+!outputs/confusion_matrix.png
+!outputs/predictions.png
+!outputs/classification_report.txt
