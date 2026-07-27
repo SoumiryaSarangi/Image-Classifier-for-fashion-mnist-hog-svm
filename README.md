@@ -38,6 +38,7 @@ A high-performance image classification pipeline that classifies **Fashion MNIST
 - [How to Run](#-how-to-run)
 - [Usage Guide](#-usage-guide)
 - [Evaluation Metrics](#-evaluation-metrics)
+- [What Was Added](#-what-was-added)
 - [Screenshots](#-screenshots)
 - [Future Improvements](#-future-improvements)
 - [License](#-license)
@@ -333,6 +334,45 @@ weighted avg     0.8902    0.8923    0.8911     10000
 
 > [!NOTE]
 > Results may vary slightly depending on system and library versions. The metrics above are representative of a typical run.
+
+---
+
+## 🔨 What Was Added
+
+### 🧱 Base Project (Starting Point)
+
+The original implementation provided the following core functionality:
+
+- Load the Fashion MNIST dataset
+- Perform basic image preprocessing
+- Extract HOG (Histogram of Oriented Gradients) features
+- Train a Linear SVM classifier
+- Evaluate the model using training and testing accuracy
+- Display a few sample Fashion MNIST images
+
+### 🔧 Improvements to Existing Functionality
+
+- Refactored the original pipeline into reusable, single-responsibility modules
+- Added model + HOG feature persistence via Joblib — retraining and re-extraction only happen once instead of on every run
+- Expanded evaluation beyond accuracy with a full classification report and confusion matrix visualization
+- Automatically saved all evaluation outputs to the `outputs/` directory
+- Improved console output with clearer progress messages and organized reporting
+
+### ✨ New Features
+
+- Added prediction support for external custom images via an interactive command-line prompt
+- Added prediction visualization displaying true vs. predicted labels side by side
+- Added automatic export of prediction screenshots, the classification report (text), and the confusion matrix (image)
+
+### 🏗️ Design & Architecture
+
+- Reorganized the project into a modular `src/` package
+- Separated responsibilities into dedicated modules: `dataset`, `preprocessing`, `features`, `model`, `visualize`, `predict`, and `cache`
+- Added dedicated `models/`, `outputs/`, and `images/` directories
+- Added a centralized `requirements.txt` for dependency management
+- Added a professional `.gitignore` to exclude generated files and virtual environments
+- Added comprehensive project documentation in `README.md`
+- Organized generated artifacts separately from source code for a cleaner project structure
 
 ---
 
