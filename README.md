@@ -9,9 +9,9 @@
 [![OpenCV](https://img.shields.io/badge/OpenCV-5.0-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[![Stars](https://img.shields.io/github/stars/yourusername/fashion-mnist-hog-svm?style=social)](https://github.com/yourusername/fashion-mnist-hog-svm)
-[![Forks](https://img.shields.io/github/forks/yourusername/fashion-mnist-hog-svm?style=social)](https://github.com/yourusername/fashion-mnist-hog-svm)
-[![Issues](https://img.shields.io/github/issues/yourusername/fashion-mnist-hog-svm?style=social)](https://github.com/yourusername/fashion-mnist-hog-svm)
+[![Stars](https://img.shields.io/github/stars/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm?style=social)](https://github.com/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm)
+[![Forks](https://img.shields.io/github/forks/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm?style=social)](https://github.com/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm)
+[![Issues](https://img.shields.io/github/issues/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm?style=social)](https://github.com/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm)
 
 <br/>
 
@@ -359,7 +359,7 @@ weighted avg     0.8902    0.8923    0.8911     10000
 
 The detailed classification report can be found here.
 
-[View Classification Report](outputs/classification_report.txt)
+![View Classification Report](outputs/classification_report.txt)
 </details>
 
 > [!TIP]
@@ -389,7 +389,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ```
 MIT License
 
-Copyright (c) 2026
+Copyright (c) 2026 Soumirya Sarangi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
