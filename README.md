@@ -113,7 +113,7 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 - Prediction visualization grid
 
 ### 🖥️ Interface
-- Interactive command-line menu
+- Interactive continuous command-line menu
 - Clean console output formatting
 - Guided user prompts
 
@@ -149,6 +149,7 @@ Fashion-MNIST-HOG-SVM/
 │
 ├── 📂 src/                            # Source package
 │   ├── __init__.py                    # Package initializer
+│   ├── config.py                      # Centralized file paths configuration
 │   ├── dataset.py                     # Fashion MNIST data loading
 │   ├── preprocessing.py               # Normalization & reshaping
 │   ├── features.py                    # HOG feature extraction
@@ -357,6 +358,10 @@ The original implementation provided the following core functionality:
 - Expanded evaluation beyond accuracy with a full classification report and confusion matrix visualization
 - Automatically saved all evaluation outputs to the `outputs/` directory
 - Improved console output with clearer progress messages and organized reporting
+- Centralized all file paths into a single `src/config.py` module for better maintainability
+- Updated the interactive CLI to run in a continuous loop, returning to the main menu after each action
+- Replaced OpenCV's `cv2.imshow` with `matplotlib.pyplot` in the prediction module to fix RGB color rendering issues and improve reliability
+- Deduplicated model loading logic to rely on a single source of truth in `src/model.py`
 
 ### ✨ New Features
 
