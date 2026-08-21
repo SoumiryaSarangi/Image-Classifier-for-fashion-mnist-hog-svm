@@ -54,7 +54,6 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 pytestdebug.log
-
 # Sphinx documentation
 docs/_build/
 
