@@ -81,40 +81,47 @@ else:
 
     save_model(model)
 
-print("\nChoose an option:")
-print("1. Evaluate Model")
-print("2. Predict Custom Image")
-print("3. Exit")
+while True:
 
-choice = input("\nEnter your choice: ")
+    print("\nChoose an option:")
+    print("1. Evaluate Model")
+    print("2. Predict Custom Image")
+    print("3. Exit")
 
-if choice == "1":
+    choice = input("\nEnter your choice: ")
 
-    train_predictions, test_predictions = evaluate_model(
-        model,
-        X_train_hog,
-        y_train,
-        X_test_hog,
-        y_test
-    )
+    if choice == "1":
 
-    show_predictions(
-        X_test,
-        y_test,
-        test_predictions,
-        class_names
-    )
+        train_predictions, test_predictions = evaluate_model(
+            model,
+            X_train_hog,
+            y_train,
+            X_test_hog,
+            y_test
+        )
 
-elif choice == "2":
+        show_predictions(
+            X_test,
+            y_test,
+            test_predictions,
+            class_names
+        )
 
-    image_path = input("\nEnter image path: ")
+    elif choice == "2":
 
-    predict_custom_image(
-        image_path,
-        model,
-        class_names
-    )
+        image_path = input("\nEnter image path: ")
 
-else:
+        predict_custom_image(
+            image_path,
+            model,
+            class_names
+        )
 
-    print("Exiting...")
+    elif choice == "3":
+
+        print("Exiting...")
+        break
+
+    else:
+
+        print("Invalid choice, please try again.")

@@ -1,9 +1,7 @@
 import os
 import joblib
 
-
-TRAIN_HOG_PATH = "models/train_hog.joblib"
-TEST_HOG_PATH = "models/test_hog.joblib"
+from src.config import TRAIN_HOG_PATH, TEST_HOG_PATH
 
 
 def hog_exists():

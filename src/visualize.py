@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+from src.config import PREDICTIONS_PATH
+
 
 class_names = [
     "T-shirt/top",
@@ -27,8 +29,6 @@ def show_sample_images(images, labels):
     plt.tight_layout()
     plt.show()
 
-import matplotlib.pyplot as plt
-
 
 def show_predictions(images, true_labels, predicted_labels, class_names):
 
@@ -50,7 +50,7 @@ def show_predictions(images, true_labels, predicted_labels, class_names):
     plt.tight_layout()
 
     plt.savefig(
-        "outputs/predictions.png",
+        PREDICTIONS_PATH,
         dpi=300,
         bbox_inches="tight"
     )

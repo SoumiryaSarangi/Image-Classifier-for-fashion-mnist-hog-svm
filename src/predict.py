@@ -1,13 +1,10 @@
 import cv2
 import numpy as np
-import joblib
+import matplotlib.pyplot as plt
 
 from src.preprocessing import preprocess_data
 from src.features import extract_hog_features
-
-
-def load_model():
-    return joblib.load("models/image_classifier.joblib")
+from src.model import load_model          # de-duplicated: use model.py's definition
 
 
 def predict(model, X):
@@ -38,8 +35,12 @@ def predict_custom_image(image_path, model, class_names):
 
     print("\nPrediction :", class_names[prediction])
 
-    cv2.imshow("Input Image", cv2.resize(image, (300, 300)))
+    # Convert BGR -> RGB for correct colour rendering in matplotlib
+    image_rgb = cv2.cvtColor(cv2.resize(image, (300, 300)), cv2.COLOR_BGR2RGB)
 
-    cv2.waitKey(0)
-
-    cv2.destroyAllWindows()
+    plt.figure()
+    plt.imshow(image_rgb)
+    plt.title(f"Prediction: {class_names[prediction]}")
+    plt.axis("off")
+    plt.tight_layout()
+    plt.show()

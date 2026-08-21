@@ -11,6 +11,12 @@ import matplotlib.pyplot as plt
 import joblib
 import os
 
+from src.config import (
+    MODEL_PATH,
+    CONFUSION_MATRIX_PATH,
+    CLASSIFICATION_REPORT_PATH,
+)
+
 
 def train_model(X_train_hog, y_train):
     print("\nTraining SVM Model...")
@@ -46,7 +52,7 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
 
     print(report)
 
-    with open("outputs/classification_report.txt", "w") as file:
+    with open(CLASSIFICATION_REPORT_PATH, "w") as file:
         file.write(report)
 
     cm = confusion_matrix(y_test, test_predictions)
@@ -63,7 +69,7 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
 
     plt.title("Confusion Matrix")
 
-    plt.savefig("outputs/confusion_matrix.png", dpi=300, bbox_inches="tight")
+    plt.savefig(CONFUSION_MATRIX_PATH, dpi=300, bbox_inches="tight")
 
     plt.show()
 
@@ -71,11 +77,11 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
 
 
 def save_model(model):
-    joblib.dump(model, "models/image_classifier.joblib")
+    joblib.dump(model, MODEL_PATH)
     print("\nModel Saved Successfully!")
 
 def load_model():
-    model = joblib.load("models/image_classifier.joblib")
+    model = joblib.load(MODEL_PATH)
 
     print("\nSaved model loaded successfully!")
 
@@ -83,4 +89,4 @@ def load_model():
 
 def model_exists():
 
-    return os.path.exists("models/image_classifier.joblib") 
+    return os.path.exists(MODEL_PATH)
