@@ -2,11 +2,12 @@
 
 # 👗 Fashion MNIST Image Classifier
 
-### HOG Feature Extraction + Linear SVM
+### HOG Feature Extraction + Linear SVM · Streamlit Web UI
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-5.0-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.45-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 [![Stars](https://img.shields.io/github/stars/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm?style=social)](https://github.com/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm)
@@ -15,7 +16,7 @@
 
 <br/>
 
-A high-performance image classification pipeline that classifies **Fashion MNIST** images using **Histogram of Oriented Gradients (HOG)** feature extraction and a **Linear Support Vector Machine (SVM)** — built with a clean, modular Python architecture.
+A high-performance image classification pipeline that classifies **Fashion MNIST** images using **Histogram of Oriented Gradients (HOG)** feature extraction and a **Linear Support Vector Machine (SVM)** — built with a clean, modular Python architecture and an interactive **Streamlit web UI**.
 
 [Getting Started](#-installation) · [Usage Guide](#-usage-guide) · [Evaluation](#-evaluation-metrics) · [Contributing](#-contributing)
 
@@ -37,6 +38,7 @@ A high-performance image classification pipeline that classifies **Fashion MNIST
 - [Requirements](#-requirements)
 - [How to Run](#-how-to-run)
 - [Usage Guide](#-usage-guide)
+- [Streamlit Web UI](#-streamlit-web-ui)
 - [Evaluation Metrics](#-evaluation-metrics)
 - [What Was Added](#-what-was-added)
 - [Screenshots](#-screenshots)
@@ -62,8 +64,9 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 | **2. Preprocess** | Normalizes pixel values to `[0, 1]` and reshapes with channel dimension |
 | **3. Extract HOG** | Computes Histogram of Oriented Gradients (4×4 px/cell, 2×2 cells/block) |
 | **4. Train SVM** | Fits a Linear SVM on the extracted HOG feature vectors |
-| **5. Evaluate** | Generates accuracy, confusion matrix, and classification report |
-| **6. Predict** | Classifies custom images via the interactive CLI |
+| **5. Evaluate** | Generates accuracy, confusion matrix, classification report & confusion analysis |
+| **6. Predict** | Classifies custom images via the CLI or Streamlit web UI |
+| **7. Tune** | Optional hyperparameter tuning via GridSearchCV on a stratified subsample |
 
 ### 🏷️ Supported Classes
 
@@ -92,6 +95,8 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 - HOG feature extraction (`skimage`)
 - Linear SVM classifier (`scikit-learn`)
 - Train & test accuracy reporting
+- Hyperparameter tuning via `GridSearchCV`
+- Confusion matrix analysis (top misclassified pairs)
 
 ### 💾 Persistence
 - Model saving/loading via `joblib`
@@ -108,12 +113,13 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 - Auto-saving of all evaluation outputs
 
 ### 🖼️ Prediction
-- Custom image prediction via CLI
+- Custom image prediction via CLI & Streamlit
 - OpenCV-based image preprocessing
 - Prediction visualization grid
 
 ### 🖥️ Interface
 - Interactive continuous command-line menu
+- Premium Streamlit web UI (glassmorphism design)
 - Clean console output formatting
 - Guided user prompts
 
@@ -135,6 +141,7 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 | **Visualization** | ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square) Matplotlib | `3.11.1` |
 | **Dataset Source** | ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white) TensorFlow (Keras) | `2.21.0` |
 | **Serialization** | ![Joblib](https://img.shields.io/badge/Joblib-2C2D72?style=flat-square) Joblib | `1.5.3` |
+| **Web UI** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white) Streamlit | `1.45.0` |
 
 ---
 
@@ -143,7 +150,8 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 ```
 Fashion-MNIST-HOG-SVM/
 │
-├── 📄 main.py                        # Entry point — orchestrates the full pipeline
+├── 📄 main.py                        # CLI entry point — orchestrates the full pipeline
+├── 📄 app.py                         # Streamlit web UI for image prediction
 ├── 📄 requirements.txt               # Python dependencies
 ├── 📄 README.md                      # Project documentation (you are here!)
 │
@@ -153,7 +161,7 @@ Fashion-MNIST-HOG-SVM/
 │   ├── dataset.py                     # Fashion MNIST data loading
 │   ├── preprocessing.py               # Normalization & reshaping
 │   ├── features.py                    # HOG feature extraction
-│   ├── model.py                       # SVM training, evaluation & persistence
+│   ├── model.py                       # SVM training, evaluation, tuning & persistence
 │   ├── predict.py                     # Custom image prediction pipeline
 │   ├── visualize.py                   # Sample & prediction visualizations
 │   └── cache.py                       # HOG feature caching utilities
@@ -165,7 +173,7 @@ Fashion-MNIST-HOG-SVM/
 │
 ├── 📂 outputs/                        # Evaluation outputs
 │   ├── confusion_matrix.png           # Confusion matrix heatmap
-│   ├── classification_report.txt      # Per-class metrics report
+│   ├── classification_report.txt      # Per-class metrics + confusion analysis
 │   └── predictions.png               # Prediction visualization grid
 │
 └── 📂 images/                         # Custom images for prediction
@@ -229,6 +237,7 @@ numpy>=2.5.1
 matplotlib>=3.11.1
 joblib>=1.5.3
 pillow>=12.3.0
+streamlit>=1.45.0
 ```
 
 > [!NOTE]
@@ -237,6 +246,8 @@ pillow>=12.3.0
 ---
 
 ## 🚀 How to Run
+
+### CLI Mode
 
 ```bash
 python main.py
@@ -252,6 +263,15 @@ On first run, the pipeline will:
 
 On subsequent runs, cached HOG features and the saved model are **loaded automatically**, making startup significantly faster.
 
+### Streamlit Web UI
+
+```bash
+pip install streamlit
+streamlit run app.py
+```
+
+The web UI loads the saved model (trained via the CLI) and provides a drag-and-drop image prediction interface. See [Streamlit Web UI](#-streamlit-web-ui) for details.
+
 ---
 
 ## 📖 Usage Guide
@@ -262,7 +282,8 @@ After launching the program, you'll see the interactive menu:
 Choose an option:
 1. Evaluate Model
 2. Predict Custom Image
-3. Exit
+3. Tune Hyperparameters
+4. Exit
 ```
 
 ### Option 1 — Evaluate Model
@@ -272,6 +293,7 @@ Runs the trained model against both training and testing sets:
 - Prints **training accuracy** and **testing accuracy**
 - Displays the **confusion matrix** as a heatmap
 - Generates and saves the **classification report**
+- **Analyzes the confusion matrix** — identifies and prints the **top-3 most confused class pairs** (e.g. _"Shirt confused as T-shirt/top: 101 times"_) and appends the analysis to `outputs/classification_report.txt`
 - Shows a **prediction visualization** grid (true vs. predicted labels)
 
 All evaluation outputs are automatically saved to the `outputs/` directory.
@@ -289,14 +311,58 @@ The pipeline will:
 2. Resize to 28×28 pixels
 3. Normalize and extract HOG features
 4. Predict the fashion category
-5. Display the image with the prediction
+5. Display the image with the prediction via matplotlib
 
 > [!TIP]
 > For best results, use images with a **clean background** and a **single centered item**. The model was trained on 28×28 grayscale images, so high-contrast images work best.
 
-### Option 3 — Exit
+### Option 3 — Tune Hyperparameters
+
+Runs `GridSearchCV` to find optimal SVM hyperparameters:
+
+- Takes a **stratified 8,000-sample subset** of the training data (configurable) to keep grid search fast and RAM-friendly
+- Searches over `C = [0.01, 0.1, 1, 10]` × `kernel = ["linear", "rbf"]` with **3-fold cross-validation**
+- Prints the **best params** and **best CV accuracy**
+- **Retrains** a fresh SVM with the best params on the **full 60,000-sample training set**
+- Prompts whether to **save** the tuned model (overwrites the existing saved model) or discard it
+
+> [!NOTE]
+> Tuning is intentionally **opt-in** and only runs when you pick this menu option — it is never triggered automatically on startup.
+
+### Option 4 — Exit
 
 Cleanly exits the program.
+
+---
+
+## 🌐 Streamlit Web UI
+
+The project includes a **premium Streamlit web app** (`app.py`) for browser-based prediction — no terminal needed.
+
+### Running the Web UI
+
+```bash
+pip install streamlit
+streamlit run app.py
+```
+
+> [!IMPORTANT]
+> The web UI requires a **pre-trained model** (`models/image_classifier.joblib`). Run `python main.py` first to train and save the model before launching the Streamlit app.
+
+### Web UI Features
+
+| Feature | Description |
+|---------|-------------|
+| **Model loading** | Loads the saved SVM model once via `@st.cache_resource` (no reloading on each interaction) |
+| **Drag & drop upload** | Accepts PNG, JPG, JPEG images via a styled file uploader |
+| **Live prediction** | Runs the same HOG pipeline as the CLI and displays the predicted class |
+| **Two-column layout** | Uploaded image on the left, prediction result card on the right |
+| **Confidence display** | Shows class probabilities if the model supports `predict_proba` (graceful fallback if not) |
+| **Premium design** | Glassmorphism cards, gradient backgrounds, Inter font, animated hero, custom CSS |
+
+### How It Works
+
+`app.py` imports `load_model()`, `model_exists()`, `preprocess_data()`, and `extract_hog_features()` directly from the existing `src/` package — no model-loading or preprocessing logic is duplicated. The only duplicated element is the `CLASS_NAMES` list (since importing `main.py` would trigger the full pipeline).
 
 ---
 
@@ -362,17 +428,21 @@ The original implementation provided the following core functionality:
 - Updated the interactive CLI to run in a continuous loop, returning to the main menu after each action
 - Replaced OpenCV's `cv2.imshow` with `matplotlib.pyplot` in the prediction module to fix RGB color rendering issues and improve reliability
 - Deduplicated model loading logic to rely on a single source of truth in `src/model.py`
+- Added **confusion matrix analysis** — `analyze_confusion_matrix()` automatically identifies the top-3 most confused class pairs after evaluation and appends the analysis to the classification report
+- Added **invalid input handling** — non-menu inputs now print a message and re-prompt instead of silently exiting
 
 ### ✨ New Features
 
 - Added prediction support for external custom images via an interactive command-line prompt
 - Added prediction visualization displaying true vs. predicted labels side by side
 - Added automatic export of prediction screenshots, the classification report (text), and the confusion matrix (image)
+- Added **hyperparameter tuning** via `GridSearchCV` — searches over `C` and `kernel` on a stratified subsample, then retrains on the full training set with the best params. Exposed as CLI menu option 3
+- Added a **Streamlit web UI** (`app.py`) — a premium, glassmorphism-styled browser interface for drag-and-drop image prediction, reusing the existing `src/` pipeline without duplicating logic
 
 ### 🏗️ Design & Architecture
 
 - Reorganized the project into a modular `src/` package
-- Separated responsibilities into dedicated modules: `dataset`, `preprocessing`, `features`, `model`, `visualize`, `predict`, and `cache`
+- Separated responsibilities into dedicated modules: `dataset`, `preprocessing`, `features`, `model`, `visualize`, `predict`, `cache`, and `config`
 - Added dedicated `models/`, `outputs/`, and `images/` directories
 - Added a centralized `requirements.txt` for dependency management
 - Added a professional `.gitignore` to exclude generated files and virtual environments
@@ -414,9 +484,9 @@ The detailed classification report can be found here.
 
 ## 🔮 Future Improvements
 
-- [ ] 🌐 Add a web-based UI using Streamlit or Gradio
-- [ ] 🔧 Hyperparameter tuning with GridSearchCV / RandomizedSearchCV
-- [ ] 📈 Experiment with RBF / Polynomial SVM kernels
+- [x] 🌐 ~~Add a web-based UI using Streamlit or Gradio~~ — ✅ Streamlit UI added (`app.py`)
+- [x] 🔧 ~~Hyperparameter tuning with GridSearchCV / RandomizedSearchCV~~ — ✅ `tune_model()` with GridSearchCV added
+- [x] 📈 ~~Experiment with RBF / Polynomial SVM kernels~~ — ✅ Grid search includes both `linear` and `rbf` kernels
 - [ ] 🧪 Cross-validation for more robust evaluation
 - [ ] 🧹 Data augmentation (rotation, flip, noise)
 - [ ] 📦 Docker containerization for reproducibility

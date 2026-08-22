@@ -8,7 +8,8 @@ from src.model import (
     evaluate_model,
     save_model,
     load_model,
-    model_exists
+    model_exists,
+    tune_model,
 )
 from src.cache import (
     hog_exists,
@@ -86,7 +87,8 @@ while True:
     print("\nChoose an option:")
     print("1. Evaluate Model")
     print("2. Predict Custom Image")
-    print("3. Exit")
+    print("3. Tune Hyperparameters")
+    print("4. Exit")
 
     choice = input("\nEnter your choice: ")
 
@@ -97,7 +99,8 @@ while True:
             X_train_hog,
             y_train,
             X_test_hog,
-            y_test
+            y_test,
+            class_names=class_names
         )
 
         show_predictions(
@@ -118,6 +121,19 @@ while True:
         )
 
     elif choice == "3":
+
+        tuned_model = tune_model(X_train_hog, y_train)
+
+        save_choice = input("\nSave tuned model? (y/n): ").strip().lower()
+
+        if save_choice == "y":
+            save_model(tuned_model)
+            model = tuned_model          # use tuned model for the rest of the session
+            print("Tuned model is now active for this session.")
+        else:
+            print("Tuned model discarded. Existing model unchanged.")
+
+    elif choice == "4":
 
         print("Exiting...")
         break
