@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-5.0-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.45-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.62-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 [![Stars](https://img.shields.io/github/stars/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm?style=social)](https://github.com/SoumiryaSarangi/Image-Classifier-for-fashion-mnist-hog-svm)
@@ -141,7 +141,7 @@ Input Image (28×28) → Preprocessing → HOG Feature Extraction → Linear SVM
 | **Visualization** | ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square) Matplotlib | `3.11.1` |
 | **Dataset Source** | ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white) TensorFlow (Keras) | `2.21.0` |
 | **Serialization** | ![Joblib](https://img.shields.io/badge/Joblib-2C2D72?style=flat-square) Joblib | `1.5.3` |
-| **Web UI** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white) Streamlit | `1.45.0` |
+| **Web UI** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white) Streamlit | `1.62.0` |
 
 ---
 
@@ -237,7 +237,7 @@ numpy>=2.5.1
 matplotlib>=3.11.1
 joblib>=1.5.3
 pillow>=12.3.0
-streamlit>=1.45.0
+streamlit>=1.62.0
 ```
 
 > [!NOTE]
@@ -380,27 +380,37 @@ The model is evaluated using industry-standard classification metrics:
 
 ### Sample Classification Report
 
+The table below shows the results for the **tuned model** (C=10, kernel=rbf, found by GridSearchCV) trained on the full 60,000-sample training set:
+
 ```
               precision    recall  f1-score   support
 
-           0     0.8425    0.8560    0.8492      1000
-           1     0.9890    0.9710    0.9799      1000
-           2     0.8119    0.8360    0.8238      1000
-           3     0.8871    0.8950    0.8910      1000
-           4     0.8089    0.8370    0.8227      1000
-           5     0.9721    0.9570    0.9645      1000
-           6     0.7214    0.6830    0.7017      1000
-           7     0.9393    0.9620    0.9505      1000
-           8     0.9754    0.9720    0.9737      1000
-           9     0.9542    0.9540    0.9541      1000
+           0     0.8707    0.8620    0.8663      1000
+           1     0.9879    0.9800    0.9839      1000
+           2     0.8614    0.8640    0.8627      1000
+           3     0.9032    0.9240    0.9135      1000
+           4     0.8615    0.8830    0.8721      1000
+           5     0.9788    0.9710    0.9749      1000
+           6     0.7627    0.7330    0.7476      1000
+           7     0.9482    0.9700    0.9590      1000
+           8     0.9811    0.9850    0.9830      1000
+           9     0.9767    0.9640    0.9703      1000
 
-    accuracy                         0.8923     10000
-   macro avg     0.8902    0.8923    0.8911     10000
-weighted avg     0.8902    0.8923    0.8911     10000
+    accuracy                         0.9136     10000
+   macro avg     0.9132    0.9136    0.9133     10000
+weighted avg     0.9132    0.9136    0.9133     10000
+```
+
+**Top-3 most confused class pairs** (automatically detected by `analyze_confusion_matrix()`):
+
+```
+  T-shirt/top confused as Shirt: 101 times
+  Shirt confused as T-shirt/top: 101 times
+  Shirt confused as Pullover: 71 times
 ```
 
 > [!NOTE]
-> Results may vary slightly depending on system and library versions. The metrics above are representative of a typical run.
+> The untuned linear SVM baseline achieved **89.23%** test accuracy. Hyperparameter tuning (GridSearchCV, C=10, rbf kernel) improved this to **91.36%** — a +2.13 point gain, with the previously weakest class (Shirt, F1 0.70 → 0.75) showing the largest improvement.
 
 ---
 
@@ -493,7 +503,7 @@ The detailed classification report can be found here.
 - [ ] 🤖 Compare with CNN-based approaches (TensorFlow / PyTorch)
 - [ ] 📊 Add ROC-AUC curves and per-class visualizations
 - [ ] ⚡ GPU-accelerated HOG extraction
-- [ ] 🧬 Experiment with PCA dimensionality reduction before SVM
+- [~] 🧬 PCA dimensionality reduction — **evaluated and intentionally reverted**: 95% variance retention reduced features from 1,296 → 354 and narrowed the train/test gap (~8.6 → ~3.1 pts), but cost **3.2 points of test accuracy** (91.36% → 88.16%). Not adopted in the final model.
 
 ---
 
